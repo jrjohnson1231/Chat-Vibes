@@ -25,7 +25,8 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-app.listen(8080);
+var port = process.env.PORT || 8080;
+app.listen(port);
 
 app.post('/tone', function(req, res) {
   console.log(req.body);
