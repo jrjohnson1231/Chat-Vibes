@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Test</title>
+  <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="rx.all.js"></script>
+  <script src="rx.dom.compat.js"></script>
+</head>
+<body>
+  <input type="text" name="thing" id="textInput">
+  <script>
+    console.log('hello world');
+    function makeRequest (data) {
+      return $.ajax({
+        url: '//0.0.0.0:8080/tone', 
+        type: 'POST', 
+        contentType: 'application/json', 
+        data: JSON.stringify({text: data}),
+      }).promise()
+    }
+
+    function handler(data) {
+      return Rx.Observable.fromPromise(makeRequest(data))
+    }
+
+    var textInput = document.querySelector('#textInput');
+    console.log(Rx.DOM.keyup, textInput)
+    var throttledInput = Rx.DOM.keyup(textInput)
+    .pluck('target','value')
+    .filter( function (text) {
+      return text.length > 2;
+    })
+    .debounce(500)
+    .distinctUntilChanged();
+
+    var output = throttledInput.flatMapLatest(handler);
+
+    output.subscribe(
+    function (data) {
+      console.log(data);
+    },
+    function (e) {
+        console.log(e);
+    })
+  </script>
+</body>
+</html>
