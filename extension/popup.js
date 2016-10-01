@@ -14,6 +14,7 @@
       "agreeableness": [":+1:", ":fist:", ":hearts:"]
     }
     function makeRequest (data) {
+      console.log(data);
       return $.ajax({
         url: '//ndhacks2016.herokuapp.com/tone', 
         type: 'POST', 
@@ -54,7 +55,7 @@
         if (tone.category == 'social') {
           tone.score *= .72;
         }
-        return +tone.score > .7;
+        return +tone.score > .7 && tone.tone_name != 'emotional range';
       });
       console.log(data);
       if (!data.length) return;
@@ -64,6 +65,8 @@
       if (!tone) return;
       console.log(tone);
       var r2 = Math.floor(Math.random() * tone.length);
+
+      
       textInput.value += (" " + tone[r2]);
     },
     function (e) {
