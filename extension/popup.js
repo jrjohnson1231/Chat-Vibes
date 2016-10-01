@@ -1,4 +1,19 @@
 (function (chrome) {
+    var emoji_map = {
+      "anger": " :anger:",
+      "disgust": "",
+      "fear": "",
+      "joy": "",
+      "sadness": "",
+      "analytical": "",
+      "confident": "",
+      "tenative": "",
+      "openness": "",
+      "conscientiousness": "",
+      "extraversion": "",
+      "agreeableness": "",
+      "emotional Range": "",
+    }
     function makeRequest (data) {
       return $.ajax({
         url: '//ndhacks2016.herokuapp.com/tone', 
@@ -35,9 +50,11 @@
         Array.prototype.push.apply(res, cur);
         return res;
       }).filter(function(tone) {
-        return +tone.score > .6;
+        return +tone.score > .8;
       });
-      
+      for (var i = 0; i < data.size; i++) {
+        if (data[i].)
+      }
       console.log(data);
     },
     function (e) {

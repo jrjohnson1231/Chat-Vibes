@@ -1,37 +1,21 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
-    <title>Smart Emojis</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-      }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
-      }
-    </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
     <script src="popup.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <title>Smart Emojis For Slack</title>
   </head>
   <body>
-    <div id="status">HELLO WORLD</div>
-    <!-- <img id="image-result" hidden> -->
+      <div class="container text-center">
+        <div class="row card-panel indigo darken-1 light-blue-text text-lighten-5">
+        <!-- Page Content goes here -->
+          Welcome to Slack Emojis with Watson
+        </div>  
+        <div class="row card-panel indigo lighten-2 light-blue-text text-lighten-5">
+          Let watson choose your emojis so you dont have to
+        </div>
+      </div>
   </body>
 </html>
 
