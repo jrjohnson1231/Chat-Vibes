@@ -1,18 +1,18 @@
 (function (chrome) {
     var emoji_map = {
-      "anger": " :anger:",
-      "disgust": "",
-      "fear": "",
-      "joy": "",
-      "sadness": "",
-      "analytical": "",
-      "confident": "",
-      "tenative": "",
-      "openness": "",
-      "conscientiousness": "",
-      "extraversion": "",
-      "agreeableness": "",
-      "emotional Range": "",
+      "anger": [":anger:", ":triumph:", ":angry:"],
+      "disgust": [":mask:", ":face_with_rolling_eyes:"],
+      "fear": [":fearful:", ":cold_sweat:", ":skull:"],
+      "joy": [":grinning:", ":smile:", ":blush:"],
+      "sadness": [":slightly_frowning_face:"],
+      "analytical": [":thinking_face:", ":sleuth_or_spy:"],
+      "confident": [":muscle:", ":sunglasses:"],
+      "tenative": [":sweat_smile:", ":zipper_mouth_face:", ":no_mouth:"],
+      "openness": [":hugging_face:", ":openness:"],
+      "conscientiousness": [":sleuth_or_spy:"],
+      "extraversion": [":v:", ":joy:", ":hugging_face:"],
+      "agreeableness": [":+1:", ":fist:"],
+      "emotional range": [":worried:", ":confounded:"],
     }
     function makeRequest (data) {
       return $.ajax({
@@ -31,6 +31,7 @@
     var throttledInput = Rx.DOM.keyup(textInput)
     .pluck('target','value')
     .filter( function (text) {
+      console.log("test len: ", text.length);
       return text.length > 2;
     })
     .debounce(500)
@@ -51,15 +52,18 @@
         Array.prototype.push.apply(res, cur);
         return res;
       }).filter(function(tone) {
-        return +tone.score > .8;
+        return +tone.score > .6;
       });
-      for (var i = 0; i < data.size; i++) {
-        if (data[i].)
-      }
       console.log(data);
+      var r = Math.floor(Math.random() * data.length);
+      console.log(r);
+      var tone = emoji_map[data[r].tone_name];
+      console.log(tone);
+      var r2 = Math.floor(Math.random() * tone.length);
+      textInput.value += (" " + tone[r2]);
     },
     function (e) {
         console.log(e);
-    })
+    });
 
 }(chrome));
