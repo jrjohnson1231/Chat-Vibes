@@ -14,7 +14,7 @@
       "matches": ["https://*/*"],
       "js": [ "jquery-3.1.1.min.js",
               "rx.all.js",
-              "rx.dom.js",
+              "rx.dom.compat.js",
               "popup.js"
             ]
     }

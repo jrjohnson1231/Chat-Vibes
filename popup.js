@@ -5,6 +5,7 @@
   // document.getElementsByTagName('head')[0].appendChild(js);
 
     function makeRequest (data) {
+      document.querySelector('#message-input') += 😀;
       return $.ajax({
         url: '//0.0.0.0:8080/tone', 
         type: 'POST', 
