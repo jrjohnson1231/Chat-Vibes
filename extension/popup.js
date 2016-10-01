@@ -1,6 +1,7 @@
 (function (chrome) {
     console.log('hello world');
     function makeRequest (data) {
+      document.querySelector("#message-input").value += "xxxxx";
       return $.ajax({
         url: '//0.0.0.0:8080/tone', 
         type: 'POST', 
@@ -14,7 +15,6 @@
     }
 
     var textInput = document.querySelector('#textInput');
-    console.log(Rx.DOM.keyup, textInput)
     var throttledInput = Rx.DOM.keyup(textInput)
     .pluck('target','value')
     .filter( function (text) {
