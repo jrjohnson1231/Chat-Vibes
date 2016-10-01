@@ -7,7 +7,7 @@
       "sadness": [":slightly_frowning_face:"],
       "analytical": [":thinking_face:", ":sleuth_or_spy:"],
       "confident": [":muscle:", ":sunglasses:"],
-      "tenative": [":sweat_smile:", ":zipper_mouth_face:", ":no_mouth:"],
+      "tentative": [":sweat_smile:", ":zipper_mouth_face:", ":no_mouth:"],
       "openness": [":hugging_face:", ":openness:"],
       "conscientiousness": [":sleuth_or_spy:"],
       "extraversion": [":v:", ":joy:", ":hugging_face:"],
@@ -31,7 +31,6 @@
     var throttledInput = Rx.DOM.keyup(textInput)
     .pluck('target','value')
     .filter( function (text) {
-      console.log("test len: ", text.length);
       return text.length > 2;
     })
     .debounce(500)
@@ -52,9 +51,14 @@
         Array.prototype.push.apply(res, cur);
         return res;
       }).filter(function(tone) {
-        return +tone.score > .6;
+        console.log(tone.tone_name, tone.score);
+        if (tone.category == 'social') {
+          tone.score *= .72;
+        }
+        return +tone.score > .7;
       });
       console.log(data);
+      if (!data.length) return;
       var r = Math.floor(Math.random() * data.length);
       console.log(r);
       var tone = emoji_map[data[r].tone_name];
