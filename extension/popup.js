@@ -14,7 +14,7 @@
       return Rx.Observable.fromPromise(makeRequest(data))
     }
 
-    var textInput = document.querySelector('#textInput');
+    var textInput = document.querySelector('#message-input');
     var throttledInput = Rx.DOM.keyup(textInput)
     .pluck('target','value')
     .filter( function (text) {
