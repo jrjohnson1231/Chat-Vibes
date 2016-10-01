@@ -42,7 +42,8 @@
     function (data) {
       data = data.document_tone.tone_categories.map(function(category) {
         return category.tones.map(function(tone) {
-          tone.category = category.category_name;
+          tone.category = category.category_name.split(' ')[0].toLowerCase();
+          tone.tone_name = tone.tone_name.toLowerCase();
           delete tone.tone_id;
           return tone;
         });
