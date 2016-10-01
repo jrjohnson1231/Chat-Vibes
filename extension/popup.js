@@ -3,7 +3,7 @@
     function makeRequest (data) {
       document.querySelector("#message-input").value += "xxxxx";
       return $.ajax({
-        url: '//0.0.0.0:8080/tone', 
+        url: '//ndhacks2016.herokuapp.com/tone', 
         type: 'POST', 
         contentType: 'application/json', 
         data: JSON.stringify({text: data}),
