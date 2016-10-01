@@ -1,9 +1,8 @@
 (function (chrome) {
     console.log('hello world');
     function makeRequest (data) {
-      document.querySelector("#message-input").value += "xxxxx";
       return $.ajax({
-        url: '//0.0.0.0:8080/tone', 
+        url: 'https://0.0.0.0:8080/tone', 
         type: 'POST', 
         contentType: 'application/json', 
         data: JSON.stringify({text: data}),
