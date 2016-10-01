@@ -15,6 +15,7 @@
       "emotional range": [":worried:", ":confounded:"],
     }
     function makeRequest (data) {
+      console.log(data);
       return $.ajax({
         url: '//ndhacks2016.herokuapp.com/tone', 
         type: 'POST', 
@@ -55,7 +56,7 @@
         if (tone.category == 'social') {
           tone.score *= .72;
         }
-        return +tone.score > .7;
+        return +tone.score > .7 && tone.tone_name != 'emotional range';
       });
       console.log(data);
       if (!data.length) return;
@@ -64,6 +65,8 @@
       var tone = emoji_map[data[r].tone_name];
       console.log(tone);
       var r2 = Math.floor(Math.random() * tone.length);
+
+      
       textInput.value += (" " + tone[r2]);
     },
     function (e) {
