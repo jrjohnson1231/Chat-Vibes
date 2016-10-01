@@ -2,7 +2,7 @@
     console.log('hello world');
     function makeRequest (data) {
       return $.ajax({
-        url: 'https://0.0.0.0:8080/tone', 
+        url: '//ndhacks2016.herokuapp.com/tone', 
         type: 'POST', 
         contentType: 'application/json', 
         data: JSON.stringify({text: data}),
