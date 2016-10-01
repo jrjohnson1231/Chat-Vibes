@@ -36,7 +36,7 @@ app.post('/tone', function(req, res) {
       else
         var data = JSON.stringify(tone, null, 2);
         console.log(data)
-        res.send(data);
+        res.json(tone);
   });
 })
 
