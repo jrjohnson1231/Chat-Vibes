@@ -14,6 +14,31 @@
       "agreeableness": [":+1:", ":fist:"],
       "emotional range": [":worried:", ":confounded:"],
     }
+    
+    var people = {};
+
+    $(function()  {
+      $('.message_content').each(function(index) {
+        var sender = $(this).children('a.message_sender').attr('href').split('/').slice(-1)[0];
+        var message = $(this).children('span.message_body').text().replace(/:[a-zA-Z0-9|+|_|-]+:/ig, '');
+        console.log(sender, message);
+
+        if(!people[sender]) {
+          people[sender] = message;
+        } else {
+          people[sender] += (' ' + message);
+        }
+      });
+
+      for (let person in people) {
+        makeRequest(people[person]).then(function(data) {
+          data = handleData(data);
+          console.log(person, data);
+        });
+      }
+    })
+
+
     function makeRequest (data) {
       console.log(data);
       return $.ajax({
@@ -34,24 +59,14 @@
     .filter( function (text) {
       return text.length > 2;
     })
-    .debounce(500)
+    .debounce(50)
     .distinctUntilChanged();
 
     var output = throttledInput.flatMapLatest(handler)
 
     output.subscribe(
     function (data) {
-      data = data.document_tone.tone_categories.map(function(category) {
-        return category.tones.map(function(tone) {
-          tone.category = category.category_name.split(' ')[0].toLowerCase();
-          tone.tone_name = tone.tone_name.toLowerCase();
-          delete tone.tone_id;
-          return tone;
-        });
-      }).reduce(function(res, cur) {
-        Array.prototype.push.apply(res, cur);
-        return res;
-      }).filter(function(tone) {
+      data = handleData(data).filter(function(tone) {
         console.log(tone.tone_name, tone.score);
         if (tone.category == 'social') {
           tone.score *= .72;
@@ -72,5 +87,20 @@
     function (e) {
         console.log(e);
     });
+
+    function handleData(data) {
+      return data.document_tone.tone_categories.map(function(category) {
+        return category.tones.map(function(tone) {
+          tone.category = category.category_name.split(' ')[0].toLowerCase();
+          tone.tone_name = tone.tone_name.toLowerCase();
+          delete tone.tone_id;
+          return tone;
+        });
+      }).reduce(function(res, cur) {
+        Array.prototype.push.apply(res, cur);
+        return res;
+      });
+    }
+
 
 }(chrome));
