@@ -2,6 +2,7 @@
 function setDOMInfo(input) {
   var info = input.people;
   document.getElementById('my_mood').className = input.current_user;
+  document.getElementById('feed_mood').className = input.current_mood;
   for (person in info) {
     var node = document.getElementById('moods');
     var str =  '<td>' + person + '</td><td class="' + 

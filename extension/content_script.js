@@ -78,9 +78,11 @@
           })
           people[person].mood = popup_emoji[mood];
 
-          for (mood in current_mood) {
-            current_mood[mood] /= total;
+          for (m in current_mood) {
+            current_mood[m] /= total;
           }
+
+          console.log('done evaluating')
 
         });
       }
@@ -179,7 +181,21 @@
       //  should be equivalent to jquery's `$(...)`)
       // Directly respond to the sender (popup), 
       // through the specified callback */
-      max = 0;
+      var in_feed = {};
+      $('.message_content').each(function(index) {
+
+        var sender = $(this).children('a.message_sender').attr('href').split('/').slice(-1)[0];
+
+        in_feed[sender] = {};
+      });
+
+      for (person in people) {
+        if (in_feed[person] !== undefined) {
+          in_feed[person] = people[person];
+        }
+      }
+
+      max = .2;
       mood = "default";
       for (m in current_mood) {
         if (current_mood[m] > max) {
@@ -188,13 +204,13 @@
         }
       }
       var m;
-      if (current_user && people[current_user]) {
-        m = people[current_user].mood;
+      if (current_user && in_feed[current_user] !== undefined) {
+        m = in_feed[current_user].mood;
       } else {
         m = popup_emoji["default"]
       }
       var input = {
-        people: people,
+        people: in_feed,
         current_mood: popup_emoji[mood],
         current_user: m
       }
