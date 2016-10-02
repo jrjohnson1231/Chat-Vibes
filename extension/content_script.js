@@ -176,11 +176,13 @@
           mood = m;
         }
       }
-      response({
+      var input = {
         people: people,
-        current_mood: emoji_map[mood],
-        current_user: current_user
-      });
+        current_mood: popup_emoji[mood],
+        current_user: people[current_user].mood
+      }
+      console.log(input)
+      response(input);
     }
   });
 }(chrome));
