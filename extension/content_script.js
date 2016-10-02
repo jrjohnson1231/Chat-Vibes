@@ -13,6 +13,26 @@
       "extraversion": [":v:", ":hugging_face:"],
       "agreeableness": [":+1:", ":fist:", ":hearts:"]
     }
+    $(function()  {
+      $('.message_content').each(function(index) {
+        var sender = $(this).children('a.message_sender').attr('href').split('/').slice(-1)[0];
+        var message = $(this).children('span.message_body').text().replace(/:[a-zA-Z0-9|+|_|-]+:/ig, '');
+        console.log(sender, message);
+
+        if(!people[sender]) {
+          people[sender] = message;
+        } else {
+          people[sender] += (' ' + message);
+        }
+      });
+
+      for (let person in people) {
+        makeRequest(people[person]).then(function(data) {
+          data = handleData(data);
+          console.log(person, data);
+        });
+      }
+    })
     function makeRequest (data) {
       return $.ajax({
         url: '//ndhacks2016.herokuapp.com/tone', 
@@ -71,6 +91,20 @@
     function (e) {
         console.log(e);
     });
+
+    function handleData(data) {
+      return data.document_tone.tone_categories.map(function(category) {
+        return category.tones.map(function(tone) {
+          tone.category = category.category_name.split(' ')[0].toLowerCase();
+          tone.tone_name = tone.tone_name.toLowerCase();
+          delete tone.tone_id;
+          return tone;
+        });
+      }).reduce(function(res, cur) {
+        Array.prototype.push.apply(res, cur);
+        return res;
+      });
+    }
 
     var port = chrome.runtime.connect({name: "knockknock"});
     port.postMessage({joke: "Knock knock"});
