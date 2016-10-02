@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "AT&T Hack2016",
-  "description": "Let Watson Choose Your Slack Emojis",
+  "name": "Chat Vibes",
+  "description": "Let Watson Choose Your Slack Emojis And Give You The Current Mood Of A Feed",
   "version": "1.0",
   "background": {
     "scripts": ["background.js"],
