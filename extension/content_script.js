@@ -59,7 +59,7 @@
             return tone;
           });;
 
-          var max = 0;
+          var max = .3;
           var mood = 'default';
           people[person].data.forEach(function(tone) {
             if (!popup_emoji[tone.tone_name]) return;
