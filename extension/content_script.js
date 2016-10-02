@@ -14,7 +14,7 @@
     "agreeableness": [":+1:", ":fist:", ":hearts:"]
   }
   var popup_emoji = {
-    "anger": "em em-anger",
+    "anger": "em em-angry",
     "disgust": "em em-unamused",
     "fear": "em em-fearful",
     "joy": "em em-blush",
