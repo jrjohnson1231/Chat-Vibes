@@ -1,9 +1,8 @@
 // Update the relevant fields with the new data
 function setDOMInfo(input) {
   var info = input.people;
-  document.getElementById('my_mood').class = info[current_user].mood;
+  document.getElementById('my_mood').class = input.current_user;
   for (person in info) {
-    if (typeof info[person].mood == "undefined") info[person].mood = "em em-neutral_face"
     var node = document.getElementById('moods');
     var str =  '<td>' + person + '</td><td class="' + 
                 info[person].mood + '"></td>'
