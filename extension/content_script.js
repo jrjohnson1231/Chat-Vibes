@@ -19,7 +19,7 @@
     "fear": "em em-fearful",
     "joy": "em em-blush",
     "sadness": "em em-cry",
-    "analytical": "",
+    "analytical": "em em-notebook",
     "confident": "em em-muscle",
     "tentative": "em em-no_mouth",
     "openness": "em em-grinning",
