@@ -13,6 +13,17 @@
       "extraversion": [":v:", ":hugging_face:"],
       "agreeableness": [":+1:", ":fist:", ":hearts:"]
     }
+    var popup_emoji = {
+      "anger": "em em-anger",
+      "disgust": "em em-unamused",
+      "fear": "em em-fearful",
+      "joy": "em em-blush",
+      "sadness": "em em-cry",
+      "analytical": "",
+      "confident": "em em-muscle",
+      "tentative": "em em-no_mouth",
+      "openness": "em em-grinning"
+    }
     var people = {};
     $(function()  {
       $('.message_content').each(function(index) {
@@ -103,24 +114,6 @@
       });
     }
 
-    // function sendMessage(data) {
-    //   chrome.runtime.sendMessage(data, function(response) {
-    //     console.log(response);
-    //   })
-    // }
-  //   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  //     console.log(sender);
-  //     sendResponse('hello')
-  //   });
-
-  //   var port = chrome.runtime.connect({name: 'knockknock'})
-
-  //   console.log('knock, knocking')
-  // port.postMessage({joke: 'Knock Knock'});
-  // port.onMessage.addListener(function (msg) {
-  //   console.log(msg);
-  // })
-  // Inform the background page that 
 // this tab should have a page-action
   chrome.runtime.sendMessage({
     from:    'content',
@@ -137,7 +130,6 @@
       var domInfo = {
         mood:   'em em-peach',
       };
-
       // Directly respond to the sender (popup), 
       // through the specified callback */
       response(domInfo);
