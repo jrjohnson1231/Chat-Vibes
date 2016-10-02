@@ -27,12 +27,15 @@
   }
 
   function evaluateFeed() {
+    console.log('evaluating feed');
+
     for (mood in popup_emoji) {
       current_mood[mood] = 0;
     }
 
     $(function()  {
       current_user = $('span.current_user_name').text();
+
       $('.message_content').each(function(index) {
 
         var sender = $(this).children('a.message_sender').attr('href').split('/').slice(-1)[0];
@@ -117,6 +120,9 @@
   var throttledInput = Rx.DOM.keyup(textInput)
   .pluck('target','value')
   .filter( function (text) {
+    if (text.length == 0) {
+      evaluateFeed();
+    }
     return text.length > 2;
   }) 
   .debounce(500)
@@ -176,10 +182,16 @@
           mood = m;
         }
       }
+      var m;
+      if (current_user && people[current_user]) {
+        m = people[current_user].mood;
+      } else {
+        m = popup_emoji["default"]
+      }
       var input = {
         people: people,
         current_mood: popup_emoji[mood],
-        current_user: people[current_user].mood
+        current_user: m
       }
       console.log(input)
       response(input);
