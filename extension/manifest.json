@@ -4,7 +4,9 @@
   "name": "AT&T Hack2016",
   "description": "Let Watson Choose Your Slack Emojis",
   "version": "1.0",
-
+  "background": {
+    "scripts": ["popup.js"]
+  },
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
@@ -15,7 +17,7 @@
       "js": [ "jquery-3.1.1.min.js",
               "rx.all.js",
               "rx.dom.compat.js",
-              "popup.js"
+              "content_script.js"
             ]
     }
   ],

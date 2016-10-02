@@ -2,7 +2,13 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 100%;
   min-width: 300px;
+  width: 100%;
 }
 .container {
-  /*width: 400px;*/
+  min-width: 300px !important;
+}
+
+html {
+  width: 100%;
+  min-width: 300px;
 }
