@@ -1,22 +1,15 @@
 (function (chrome) {
-  document.addEventListener('DOMContentLoaded', function() {
-  $('#mood').html("changed");
-  // checkPageButton.addEventListener('click', function() {
+	chrome.runtime.onConnect.addListener(function(port) {
+		console.assert(port.name == "knockknock");
+		port.onMessage.addListener(function(msg) {
+			if (msg.joke == "Knock knock") {
+				port.postMessage({question: "Who's there?"});
+			}
+			else if (msg.answer == "Madame")
+				port.postMessage({question: "Madame who?"});
+			else if (msg.answer == "Madame... Bovary")
+				port.postMessage({question: "I don't get it."});
+		});
+	});
 
-  //   chrome.tabs.getSelected(null, function(tab) {
-  //     d = document;
-
-  //     var f = d.createElement('form');
-  //     f.action = 'http://gtmetrix.com/analyze.html?bm';
-  //     f.method = 'post';
-  //     var i = d.createElement('input');
-  //     i.type = 'hidden';
-  //     i.name = 'url';
-  //     i.value = tab.url;
-  //     f.appendChild(i);
-  //     d.body.appendChild(f);
-  //     f.submit();
-  //   });
-  // }, false);
-}, false);
 }(chrome));
