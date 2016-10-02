@@ -23,7 +23,7 @@
     "confident": "em em-muscle",
     "tentative": "em em-no_mouth",
     "openness": "em em-grinning",
-    "default": "em"
+    "default": "em em-neutral_face"
   }
 
   function evaluateFeed() {
