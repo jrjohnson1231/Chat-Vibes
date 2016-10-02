@@ -18,7 +18,7 @@
       $('.message_content').each(function(index) {
         var sender = $(this).children('a.message_sender').attr('href').split('/').slice(-1)[0];
         var message = $(this).children('span.message_body').text().replace(/:[a-zA-Z0-9|+|_|-]+:/ig, '');
-        console.log(sender, message);
+        // console.log(sender, message);
 
         if(!people[sender]) {
           people[sender] = message;
@@ -30,7 +30,7 @@
       for (let person in people) {
         makeRequest(people[person]).then(function(data) {
           data = handleData(data);
-          console.log(person, data);
+          // console.log(person, data);
         });
       }
     })
@@ -71,19 +71,19 @@
         Array.prototype.push.apply(res, cur);
         return res;
       }).filter(function(tone) {
-        console.log(tone.tone_name, tone.score);
+        // console.log(tone.tone_name, tone.score);
         if (tone.category == 'social') {
           tone.score *= .72;
         }
         return +tone.score > .7 && tone.tone_name != 'emotional range';
       });
-      console.log(data);
+      // console.log(data);
       if (!data.length) return;
       var r = Math.floor(Math.random() * data.length);
-      console.log(r);
+      // console.log(r);
       var tone = emoji_map[data[r].tone_name];
       if (!tone) return;
-      console.log(tone);
+      // console.log(tone);
       var r2 = Math.floor(Math.random() * tone.length);
 
       
