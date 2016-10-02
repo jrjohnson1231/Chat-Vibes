@@ -1,24 +1,33 @@
 <!doctype html>
 <html>
-  <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Smart Emojis For Slack</title>
-    <script src="popup.js"></script>
-  </head>
-  <body>
-      <div class="container">
-        <div class="row card-panel indigo darken-1 light-blue-text text-lighten-5">
-        <!-- Page Content goes here -->
-          Welcome to Slack Emojis with Watson!
-        </div>  
-        <div class="row card-panel indigo lighten-2 light-blue-text text-lighten-5">
-          Let watson choose your emojis so you dont have to.
-        </div>
-        <h3>Your Current Mood: <i id="mood" class="em em-smiley"></i></h3>
-      </div>
-  </body>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Smart Emojis For Slack</title>
+  <script src="popup.js"></script>
+</head>
+<body>
+ <nav>
+  <div class="nav-wrapper indigo darken-1">
+    <a class="brand-logo" style="display: inline-block; vertical-align: middle;">Emojis with Watson</a>
+  </div>
+</nav>
+<div class="row card-panel indigo lighten-1 light-blue-text text-lighten-5">
+  <!-- Page Content goes here -->
+  Welcome to Slack Emojis with Watson!
+</div>  
+<div class="row card-panel indigo lighten-2 light-blue-text text-lighten-5">
+  Let Watson Analyze Your Slack Coversations And Choose Your Emojis For You.
+</div>
+<ul class="collection">
+  <li class="collection-item"><div>Your Current Mood: <i id="mood" class="em em-smiley"></i></div></li>
+  <li class="collection-item"><div><a class="secondary-content"><i class=""></i></a></div></li>
+  <li class="collection-item"><div><a class="secondary-content"><i class=""></i></a></div></li>
+  <li class="collection-item"><div><a class="secondary-content"><i class=""></i></a></div></li>
+  <li class="collection-item"><div><a class="secondary-content"><i class=""></i></a></div></li>
+</ul>
+</body>
 </html>
 

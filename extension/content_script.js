@@ -22,7 +22,8 @@
       "analytical": "",
       "confident": "em em-muscle",
       "tentative": "em em-no_mouth",
-      "openness": "em em-grinning"
+      "openness": "em em-grinning",
+      "default": "em em-neutral_face"
     }
     var people = {};
     $(function()  {
