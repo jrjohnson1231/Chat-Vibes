@@ -13,6 +13,7 @@
       "extraversion": [":v:", ":hugging_face:"],
       "agreeableness": [":+1:", ":fist:", ":hearts:"]
     }
+    var people = {};
     $(function()  {
       $('.message_content').each(function(index) {
         var sender = $(this).children('a.message_sender').attr('href').split('/').slice(-1)[0];
@@ -108,7 +109,6 @@
 
     var port = chrome.runtime.connect({name: "knockknock"});
     port.postMessage({joke: "Knock knock"});
-    console.log(document.querySelector("#mood").value);
     port.onMessage.addListener(function(msg) {
       if (msg.question == "Who's there?")
         port.postMessage({answer: "Madame"});
