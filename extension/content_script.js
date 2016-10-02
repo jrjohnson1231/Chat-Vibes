@@ -22,12 +22,19 @@
     "analytical": "",
     "confident": "em em-muscle",
     "tentative": "em em-no_mouth",
-    "openness": "em em-grinning"
+    "openness": "em em-grinning",
+    "default": "em"
   }
 
   function evaluateFeed() {
+    for (mood in popup_emoji) {
+      current_mood[mood] = 0;
+    }
+
     $(function()  {
+      current_user = $('span.current_user_name').text();
       $('.message_content').each(function(index) {
+
         var sender = $(this).children('a.message_sender').attr('href').split('/').slice(-1)[0];
         var message = $(this).children('span.message_body').text().replace(/:[a-zA-Z0-9|+|_|-]+:/ig, '');
 
@@ -42,28 +49,31 @@
       for (let person in people) {
         total += people[person].messages.length;
       }
-      console.log('total', total);
 
       for (let person in people) {
         makeRequest(people[person].messages).then(function(data) {
-          people[person].data = handleData(data).filter(function(tone) {
+          people[person].data = handleData(data).map(function(tone) {
             if (tone.category == 'social') {
               tone.score *= .72;
             }
-            return +tone.score > .6 && popup_emoji[tone.tone_name];
+            return tone;
           });;
 
           var max = 0;
           var mood = 'default';
           people[person].data.forEach(function(tone) {
+            if (!popup_emoji[tone.tone_name]) return;
+            current_mood[tone.tone_name] += +tone.score * people[person].messages.length;
             if (tone.score > max) {
-              max = tone.score;
+              max = +tone.score;
               mood = tone.tone_name;
             }
           })
           people[person].mood = popup_emoji[mood];
 
-          console.log(people[person].mood)
+          for (mood in current_mood) {
+            current_mood[mood] /= total;
+          }
 
         });
       }
@@ -99,7 +109,8 @@
   }
 
   var people = {};
-  var current_mood;
+  var current_mood = {};
+  var current_user = undefined;
   evaluateFeed();
 
   var textInput = document.querySelector('#message-input');
@@ -157,7 +168,19 @@
       //  should be equivalent to jquery's `$(...)`)
       // Directly respond to the sender (popup), 
       // through the specified callback */
-      response(people);
+      max = 0;
+      mood = "default";
+      for (m in current_mood) {
+        if (current_mood[m] > max) {
+          max = current_mood[m];
+          mood = m;
+        }
+      }
+      response({
+        people: people,
+        current_mood: emoji_map[mood],
+        current_user: current_user
+      });
     }
   });
 }(chrome));
