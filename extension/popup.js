@@ -8,11 +8,10 @@
       "analytical": [":thinking_face:", ":sleuth_or_spy:"],
       "confident": [":muscle:", ":sunglasses:"],
       "tentative": [":sweat_smile:", ":zipper_mouth_face:", ":no_mouth:"],
-      "openness": [":hugging_face:", ":openness:"],
+      "openness": [":hugging_face:"],
       "conscientiousness": [":sleuth_or_spy:"],
-      "extraversion": [":v:", ":joy:", ":hugging_face:"],
-      "agreeableness": [":+1:", ":fist:"],
-      "emotional range": [":worried:", ":confounded:"],
+      "extraversion": [":v:", ":hugging_face:"],
+      "agreeableness": [":+1:", ":fist:", ":hearts:"]
     }
     
     var people = {};
@@ -78,6 +77,7 @@
       var r = Math.floor(Math.random() * data.length);
       console.log(r);
       var tone = emoji_map[data[r].tone_name];
+      if (!tone) return;
       console.log(tone);
       var r2 = Math.floor(Math.random() * tone.length);
 
