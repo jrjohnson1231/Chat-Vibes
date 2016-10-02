@@ -14,27 +14,29 @@
     <a class="brand-logo" style="display: inline-block; vertical-align: middle;">Emojis with Watson</a>
   </div>
 </nav>
-<div class="row card-panel indigo lighten-1 light-blue-text text-lighten-5">
-  <!-- Page Content goes here -->
-  Welcome to Slack Emojis with Watson!
-</div>  
-<div class="row card-panel indigo lighten-2 light-blue-text text-lighten-5">
-  Let Watson Analyze Your Slack Coversations And Choose Your Emojis For You.
+<div class="container">
+  <h2 class="row indigo-text">
+    <!-- Page Content goes here -->
+    Welcome!
+  </h2>  
+  <h6 class="row indigo-text">
+    Let Watson Analyze Your Slack Coversations And Choose Your Emojis For You.
+  </h6>
+  <ul class="collection striped" style="width: 100%">
+    <li class="collection-item" id="me"><div>Your Current Mood: <i id="my_mood"></i></div></li>
+    <li class="collection-item" id="me"><div>Feed Current Mood: <i id="feed_mood"></i></div></li>
+  </ul>
+  <table class="striped">
+    <thead>
+      <tr>
+        <th data-field="id">Name</th>
+        <th data-field="name">Mood</th>
+      </tr>
+    </thead>
+    <tbody id="moods">
+    </tbody>
+  </table>
 </div>
-<ul class="collection striped" style="width: 100%">
-  <li class="collection-item" id="me"><div>Your Current Mood: <i id="my_mood"></i></div></li>
-  <li class="collection-item" id="me"><div>Feed Current Mood: <i id="feed_mood"></i></div></li>
-</ul>
-<table class="striped">
-        <thead>
-          <tr>
-              <th data-field="id">Name</th>
-              <th data-field="name">Mood</th>
-          </tr>
-        </thead>
-        <tbody id="moods">
-        </tbody>
-      </table>
 </body>
 </html>
 

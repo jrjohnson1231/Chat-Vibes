@@ -1,15 +1,12 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 100%;
-  min-width: 300px;
-  width: 100%;
 }
 .container {
-  min-width: 300px !important;
+  width: 80%;
 }
 
 html {
-  width: 100%;
   min-width: 300px;
 }
 
