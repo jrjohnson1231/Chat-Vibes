@@ -135,8 +135,7 @@
       // (For your specific requirements `document.querySelectorAll(...)`
       //  should be equivalent to jquery's `$(...)`)
       var domInfo = {
-        mood:   'conscientiousness',
-
+        mood:   'em em-peach',
       };
 
       // Directly respond to the sender (popup), 

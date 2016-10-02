@@ -1,6 +1,7 @@
 // Update the relevant fields with the new data
 function setDOMInfo(info) {
-  document.getElementById('mood').textContent   = info.mood;
+  // document.getElementById('mood').textContent   = info.mood;
+  document.getElementById('mood').className = info.mood;
 }
 
 // Once the DOM is ready...
