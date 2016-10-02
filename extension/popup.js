@@ -1,22 +1,21 @@
-(function (chrome) {
-  document.addEventListener('DOMContentLoaded', function() {
-  $('#mood').html("changed");
-  // checkPageButton.addEventListener('click', function() {
+// Update the relevant fields with the new data
+function setDOMInfo(info) {
+  document.getElementById('mood').textContent   = info.mood;
+}
 
-  //   chrome.tabs.getSelected(null, function(tab) {
-  //     d = document;
-
-  //     var f = d.createElement('form');
-  //     f.action = 'http://gtmetrix.com/analyze.html?bm';
-  //     f.method = 'post';
-  //     var i = d.createElement('input');
-  //     i.type = 'hidden';
-  //     i.name = 'url';
-  //     i.value = tab.url;
-  //     f.appendChild(i);
-  //     d.body.appendChild(f);
-  //     f.submit();
-  //   });
-  // }, false);
-}, false);
-}(chrome));
+// Once the DOM is ready...
+window.addEventListener('DOMContentLoaded', function () {
+  // ...query for the active tab...
+  chrome.tabs.query({
+    active: true,
+    currentWindow: true
+  }, function (tabs) {
+    // ...and send a request for the DOM info...
+    chrome.tabs.sendMessage(
+        tabs[0].id,
+        {from: 'popup', subject: 'DOMInfo'},
+        // ...also specifying a callback to be called 
+        //    from the receiving end (content script)
+        setDOMInfo);
+  });
+});
