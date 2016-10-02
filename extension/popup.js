@@ -1,19 +1,21 @@
-(function (chrome) {
-  function changeMood(mood) {
-    document.getElementById('mood').textContent = mood;
-  }
-	chrome.runtime.onConnect.addListener(function(port) {
-		console.assert(port.name == "knockknock");
-		port.onMessage.addListener(function(msg) {
-			if (msg.joke == "Knock knock") {
-        changeMood('changed');
-				port.postMessage({question: "Who's there?"});
-			}
-			else if (msg.answer == "Madame")
-				port.postMessage({question: "Madame who?"});
-			else if (msg.answer == "Madame... Bovary")
-				port.postMessage({question: "I don't get it."});
-		});
-	});
+// Update the relevant fields with the new data
+function setDOMInfo(info) {
+  document.getElementById('mood').textContent   = info.mood;
+}
 
-}(chrome));
+// Once the DOM is ready...
+window.addEventListener('DOMContentLoaded', function () {
+  // ...query for the active tab...
+  chrome.tabs.query({
+    active: true,
+    currentWindow: true
+  }, function (tabs) {
+    // ...and send a request for the DOM info...
+    chrome.tabs.sendMessage(
+        tabs[0].id,
+        {from: 'popup', subject: 'DOMInfo'},
+        // ...also specifying a callback to be called 
+        //    from the receiving end (content script)
+        setDOMInfo);
+  });
+});

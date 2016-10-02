@@ -18,7 +18,6 @@
       $('.message_content').each(function(index) {
         var sender = $(this).children('a.message_sender').attr('href').split('/').slice(-1)[0];
         var message = $(this).children('span.message_body').text().replace(/:[a-zA-Z0-9|+|_|-]+:/ig, '');
-        // console.log(sender, message);
 
         if(!people[sender]) {
           people[sender] = message;
@@ -32,6 +31,7 @@
           data = handleData(data);
           // console.log(person, data);
         });
+        //sendMessage({person})
       }
     })
     function makeRequest (data) {
@@ -71,19 +71,15 @@
         Array.prototype.push.apply(res, cur);
         return res;
       }).filter(function(tone) {
-        // console.log(tone.tone_name, tone.score);
         if (tone.category == 'social') {
           tone.score *= .72;
         }
         return +tone.score > .7 && tone.tone_name != 'emotional range';
       });
-      // console.log(data);
       if (!data.length) return;
       var r = Math.floor(Math.random() * data.length);
-      // console.log(r);
       var tone = emoji_map[data[r].tone_name];
       if (!tone) return;
-      // console.log(tone);
       var r2 = Math.floor(Math.random() * tone.length);
 
       
@@ -107,14 +103,45 @@
       });
     }
 
-    var port = chrome.runtime.connect({name: "knockknock"});
-    port.postMessage({joke: "Knock knock"});
-    port.onMessage.addListener(function(msg) {
-      if (msg.question == "Who's there?")
-        port.postMessage({answer: "Madame"});
-      else if (msg.question == "Madame who?")
-        port.postMessage({answer: "Madame... Bovary"});
-      console.log(msg.question);
-    });
+    // function sendMessage(data) {
+    //   chrome.runtime.sendMessage(data, function(response) {
+    //     console.log(response);
+    //   })
+    // }
+  //   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  //     console.log(sender);
+  //     sendResponse('hello')
+  //   });
 
+  //   var port = chrome.runtime.connect({name: 'knockknock'})
+
+  //   console.log('knock, knocking')
+  // port.postMessage({joke: 'Knock Knock'});
+  // port.onMessage.addListener(function (msg) {
+  //   console.log(msg);
+  // })
+  // Inform the background page that 
+// this tab should have a page-action
+  chrome.runtime.sendMessage({
+    from:    'content',
+    subject: 'showPageAction'
+  });
+
+  // Listen for messages from the popup
+  chrome.runtime.onMessage.addListener(function (msg, sender, response) {
+    // First, validate the message's structure
+    if ((msg.from === 'popup') && (msg.subject === 'DOMInfo')) {
+      // Collect the necessary data 
+      // (For your specific requirements `document.querySelectorAll(...)`
+      //  should be equivalent to jquery's `$(...)`)
+      var domInfo = {
+        mood:   'conscientiousness',
+
+      };
+
+      // Directly respond to the sender (popup), 
+      // through the specified callback */
+      response(domInfo);
+    }
+  });
 }(chrome));
