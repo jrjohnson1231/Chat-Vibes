@@ -12,3 +12,7 @@ html {
   width: 100%;
   min-width: 300px;
 }
+
+div {
+  padding-top: 2px;
+}

@@ -22,12 +22,18 @@
   Let Watson Analyze Your Slack Coversations And Choose Your Emojis For You.
 </div>
 <ul class="collection">
-  <li class="collection-item"><div>Your Current Mood: <i id="mood" class="em em-smiley"></i></div></li>
-  <li class="collection-item"><div><a class="secondary-content"><i class=""></i></a></div></li>
-  <li class="collection-item"><div><a class="secondary-content"><i class=""></i></a></div></li>
-  <li class="collection-item"><div><a class="secondary-content"><i class=""></i></a></div></li>
-  <li class="collection-item"><div><a class="secondary-content"><i class=""></i></a></div></li>
+  <li class="collection-item" id="me"><div>Your Current Mood: <i id="my_mood" class="em em-neutral_face"></i></div></li>
 </ul>
+<table>
+        <thead>
+          <tr>
+              <th data-field="id">Name</th>
+              <th data-field="name">Mood</th>
+          </tr>
+        </thead>
+        <tbody id="moods">
+        </tbody>
+      </table>
 </body>
 </html>
 
