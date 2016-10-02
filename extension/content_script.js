@@ -36,6 +36,10 @@
     $(function()  {
       current_user = $('span.current_user_name').text();
 
+      $('a').click(function() {
+        evaluateFeed();
+      })
+
       $('.message_content').each(function(index) {
 
         var sender = $(this).children('a.message_sender').attr('href').split('/').slice(-1)[0];
@@ -114,6 +118,7 @@
   var people = {};
   var current_mood = {};
   var current_user = undefined;
+  var current_
   evaluateFeed();
 
   var textInput = document.querySelector('#message-input');
