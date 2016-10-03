@@ -40,10 +40,13 @@
         evaluateFeed();
       })
 
+      let in_feed = [];
+
       $('.message_content').each(function(index) {
 
         var sender = $(this).children('a.message_sender').attr('href').split('/').slice(-1)[0];
         var message = $(this).children('span.message_body').text().replace(/:[a-zA-Z0-9|+|_|-]+:/ig, '');
+        in_feed.push(sender);
 
         if(!people[sender]) {
           people[sender] = {messages: message};
@@ -52,12 +55,19 @@
         }
       });
 
+      for (let person in people) {
+        if (in_feed.indexOf(person) < 0) {
+          delete people[person];
+        }
+      }
+
       var total = 0;
       for (let person in people) {
         total += people[person].messages.length;
       }
 
       for (let person in people) {
+        console.log('# of people:', Object.keys(people).length);
         makeRequest(people[person].messages).then(function(data) {
           people[person].data = handleData(data).map(function(tone) {
             if (tone.category == 'social') {
@@ -203,6 +213,7 @@
           mood = m;
         }
       }
+      people = in_feed;
       var m;
       if (current_user && in_feed[current_user] !== undefined) {
         m = in_feed[current_user].mood;
